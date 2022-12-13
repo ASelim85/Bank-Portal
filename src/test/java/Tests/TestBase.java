@@ -2,6 +2,7 @@ package Tests;
 
 import APIS.P2P;
 import Pages.*;
+import com.google.common.collect.ImmutableMap;
 import io.github.bonigarcia.wdm.WebDriverManager;
 //import io.qameta.allure.ConfigurationBuilder;
 //import io.qameta.allure.Extension;
@@ -41,33 +42,41 @@ import java.io.IOException;
 
 import io.restassured.RestAssured;
 import org.apache.commons.io.FileUtils;
+import org.apache.maven.model.Extension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
+import org.testng.internal.Configuration;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
 //import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
 public class TestBase {
-    WebDriver driver;
+    public WebDriver driver;
     LoginPage loginPage;
     DashboardPage dashboardPage;
     MeezaReportPage meezaReportPage;
     loginTestCases login;
     P2P p2p;
-    WalletProcessPage wallProPage;
+    UserAccessPage userAccess;
     private final String url = "https://bankportalsit.axispay.app:444/";
 
     @BeforeSuite
     void setEnvironment() {
-//        allureEnvironmentWriter(
-//                ImmutableMap.<String, String>builder()
-//                        .put("Browser", "Chrome")
-//                        .put("Browser.Version", "97.0.4692.71")
-//                        .put("URL", url)
-//                        .build(), System.getProperty("user.dir")
-//                        + "/allure-results/");
+        allureEnvironmentWriter(
+                ImmutableMap.<String, String>builder()
+                        .put("Browser", "Chrome")
+                        .put("Browser.Version", "97.0.4692.71")
+                        .put("URL", url)
+                        .build(), System.getProperty("user.dir")
+                        + "/allure-results/");
     }
 
     @BeforeMethod
@@ -82,18 +91,18 @@ public class TestBase {
         meezaReportPage = new MeezaReportPage(driver);
         login = new loginTestCases();
         p2p = new P2P();
-        wallProPage = new WalletProcessPage(driver);
+        userAccess = new UserAccessPage(driver);
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @AfterMethod
-//    public void tearDown() {
-//        driver.quit();
-//    }
+    public void tearDown() {
+        driver.quit();
+    }
 
     @AfterClass
     public void generateReport() throws IOException {
-        //onGenerateAllureReport();
+//        onGenerateAllureReport();
         FileUtils.deleteDirectory(new File("target/allure-results"
         ));
     }
@@ -107,6 +116,10 @@ public class TestBase {
         driver.navigate().refresh();
     }
 
+    public static WebDriver getDriver() {
+        return null;
+    }
+}
 //    private void onGenerateAllureReport() {
 //        Runtime.getRuntime().addShutdownHook(new Thread() {
 //            public void run() {
@@ -123,7 +136,7 @@ public class TestBase {
 //                            new PrometheusExportPlugin(), new SummaryPlugin(), new ExecutorPlugin(),
 //                            new LaunchPlugin(), new Allure1Plugin(), new Allure1EnvironmentPlugin(),
 //                            new Allure2Plugin(), new ReportWebPlugin());
-//                    Configuration configuration = (new ConfigurationBuilder()).fromExtensions(extensions).build();
+//                    Configuration configuration = new com.jayway.jsonpath.Configuration.ConfigurationBuilder().fromExtensions(extensions).build();
 //                    Path resultDi = Paths.get("user.dir/allure-results");
 //                    Path outDir = Paths.get("target/allure-report");
 //                    new ReportGenerator(configuration).generate(outDir, resultDi);
@@ -134,4 +147,3 @@ public class TestBase {
 //        });
 //    }
 
-}

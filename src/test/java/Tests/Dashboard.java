@@ -2,7 +2,7 @@ package Tests;
 
 import APIS.ATM_CashOut;
 import APIS.ReceiveATMCashOut;
-import Utils.ExcelFileManager;
+import Pages.DashboardPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.io.IOException;
@@ -11,18 +11,17 @@ import java.math.BigDecimal;
 public class Dashboard extends TestBase{
     ATM_CashOut atmCashOut = new ATM_CashOut();
     @Test (priority = 0, enabled = true)
-    public void CheckDashboardIsDisplayed() throws IOException, InterruptedException {
-        loginPage.setUsername(ExcelFileManager.setDataFromExcelFile(0, 1));
-        loginPage.setPassword(ExcelFileManager.setDataFromExcelFile(1, 1));
-        loginPage.clickSignIn();
-        loginPage.setOTP(ExcelFileManager.setDataFromExcelFile(2, 1));
-        loginPage.clickVerifyOTP();
-        Assert.assertTrue(dashboardPage.isDashboardDisplayed());
+    public static boolean CheckDashboardIsDisplayed() throws IOException, InterruptedException {
+        loginTestCases.LoginWithValidCredentials();
+       // LoginPage.clickVerifyOTP();
+        Assert.assertTrue(DashboardPage.isDashboardDisplayed());
 //        driver.quit();
+        return false;
     }
     @Test (priority = 0, enabled = true)
     public void CheckChartValues() throws IOException, InterruptedException {
-        this.CheckDashboardIsDisplayed();
+        loginTestCases.LoginWithValidCredentials();
+//        this.CheckDashboardIsDisplayed();
         dashboardPage.get_BPValue();
         dashboardPage.get_CashinValue();
         dashboardPage.get_CashoutValue();
@@ -51,13 +50,13 @@ public class Dashboard extends TestBase{
 
     @Test (priority = 1, enabled = true)
     public void CheckDashboardValues() throws IOException, InterruptedException {
-        this.CheckDashboardIsDisplayed();
+        loginTestCases.LoginWithValidCredentials();
         BigDecimal prevRevValue = new BigDecimal(dashboardPage.getRevenueValue()).add(new BigDecimal(0));//
-        BigDecimal preVolValue  = new BigDecimal(dashboardPage.getVolumeValue()).add(new BigDecimal(12));
-        BigDecimal preCashOutValue =  new BigDecimal(dashboardPage.getCashOutValue()).add(new BigDecimal(12));
-        BigDecimal preTotalWalletsBalance = new BigDecimal(dashboardPage.getTotalWalletsBalance()).subtract(new BigDecimal(11));
+        BigDecimal preVolValue  = new BigDecimal(dashboardPage.getVolumeValue()).add(new BigDecimal(10));
+        BigDecimal preCashOutValue =  new BigDecimal(dashboardPage.getCashOutValue()).add(new BigDecimal(10));
+        BigDecimal preTotalWalletsBalance = new BigDecimal(dashboardPage.getTotalWalletsBalance()).subtract(new BigDecimal(10));
         dashboardPage.get_CashoutValue();
-        BigDecimal preCashOutChartValue = new BigDecimal(dashboardPage.cashOutAmount.replaceAll(",", "")).add(new BigDecimal(12));//
+        BigDecimal preCashOutChartValue = new BigDecimal(dashboardPage.cashOutAmount.replaceAll(",", "")).add(new BigDecimal(10));//
         System.out.println("preVolValue is " + preVolValue);
         System.out.println("preCashOutValue is " + preCashOutValue);
         System.out.println("preTotalWalletsBalance is "+ preTotalWalletsBalance);

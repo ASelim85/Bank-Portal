@@ -1,7 +1,7 @@
 package Tests;
 
 import APIS.*;
-import Utils.ExcelFileManager;
+import utils.ExcelFileManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

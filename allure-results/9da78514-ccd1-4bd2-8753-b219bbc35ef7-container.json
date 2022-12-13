@@ -1,0 +1,1 @@
+{"uuid":"9da78514-ccd1-4bd2-8753-b219bbc35ef7","name":"Tests.UserAccessTestCases","children":["32dc5629-dbec-48bd-84bf-f7fa7cb5fd6d"],"befores":[],"afters":[{"name":"generateReport","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1670919882505,"stop":1670919882506}],"start":1670919865058,"stop":1670919882514}

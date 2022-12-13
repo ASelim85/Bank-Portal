@@ -36,7 +36,7 @@ public class ReceiveATMCashOut {
         baseURI = "https://apisit.axispay.app:444/crossfunction/axispay-cross-functions/v1/wallet/a3e3daa7-b7f8-45f5-a7ac-fbb61608544b";
         request.put("transactionAmount", "10");
         request.put("transactionCurrency", "EGP");
-        request.put("mpin", "111111");
+        request.put("mpin", "147852");
         // @formatter:off
         Response response = given()
                 .contentType("application/json")

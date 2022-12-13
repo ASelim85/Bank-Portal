@@ -1,0 +1,1 @@
+{"uuid":"7c47382a-04c4-4ef5-b4cc-70bfac72c181","name":"Tests.RolesAccessTestCases","children":["a18331d4-c38f-45ae-b480-30dec0dcf8ee"],"befores":[],"afters":[{"name":"generateReport","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1670944289924,"stop":1670944289924}],"start":1670944275213,"stop":1670944289928}

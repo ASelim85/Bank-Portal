@@ -3,7 +3,7 @@ package Tests;
 import APIS.ATM_CashOut;
 import APIS.Deposit;
 import APIS.P2P;
-import Utils.ExcelFileManager;
+import utils.ExcelFileManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import APIS.P2P.*;
